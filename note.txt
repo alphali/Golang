@@ -1,0 +1,70 @@
+golang作用域，定义在函数外的变量是全局的，函数内部定义的变量是局部的。如果一个局部变量和一个全局变量有相同的名字，在函数执行的时候，局部变量将覆盖全局变量。
+
+package main
+var a=6
+func main(){
+p()
+q()
+p()
+}
+ 
+func p(){
+println(a)
+}
+func q(){
+    //a := 5//定义变量
+    a = 5//变量赋值
+    println(a)
+}
+当在函数内定义是，输出656，而赋值为655.
+
+局部变量仅在定义它的函数时有效。
+
+package main
+var a int
+func main(){
+    a=5
+    println(a)
+    f()
+}
+ 
+func f(){
+    a := 6
+    println(a)
+    g()
+}
+func g(){
+    println(a)
+}
+输出565
+
+多值返回。
+教程上有趣的例子：
+
+package main
+ 
+func nextInt(b []byte, i int) (int, int){
+    x :=0
+    for ; i
+ 
+定义一个函数，传递一个byte数组和一个位置i，返回两个int类型。
+ 
+看到golang的格言： 用更少的代码做更多的事
+ 
+延迟代码defer。
+在defer后指定的函数会在函数退出前调用。
+ 
+<pre lang="golang">func ReadWrite() bool{
+file.Open("file")
+//do something
+if failureX{
+file.Close()
+return false
+}
+if failureY{
+file.Close()
+return false
+}
+file.Close()
+return true
+}
